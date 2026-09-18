@@ -1,0 +1,18 @@
+<div class="mode-choice">
+ <button class="settings-button" (click)="showSettings.set(true)"><i class="fa-solid fa-gear"></i>
+  </button>
+
+  <h1>🕵🏻‍♂️ Spyfall-Game</h1>
+  <button (click)="goLocal()">Lokal spielen</button>
+  <button (click)="goOnline()">Online spielen</button>
+
+  @if (showSettings()) {
+  <div class="hint-backdrop" (click)="showSettings.set(false)"></div>
+  <div class="hint-box">
+    <p class="hint-title">Einstellungen</p>
+    <p class="settings-placeholder">Design-Umschaltung kommt bald!</p>
+    <button class="hint-close" (click)="goToLocations()">Orte bearbeiten</button>
+    <button class="hint-close" (click)="showSettings.set(false)">Schließen</button>
+  </div>
+  }
+</div>

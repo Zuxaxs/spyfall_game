@@ -1,0 +1,208 @@
+:host {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.timer-container {
+  position: relative;
+  width: 220px;
+  height: 220px;
+}
+
+.timer-ring {
+  transform: rotate(-90deg);
+  /* Start oben bei 12 Uhr statt bei 3 Uhr */
+}
+
+circle {
+  fill: none;
+  stroke-width: 14;
+}
+
+.ring-bg {
+  stroke: var(--color-surface);
+}
+
+.ring-progress {
+  stroke: var(--color-primary);
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1s linear;
+}
+
+.time-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: bold;
+  color: var(--color-text);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pause-button,
+.stop-button {
+  width: 3.5rem;
+  height: 3.5rem;
+  padding: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.pause-button {
+  border: none;
+  background: var(--color-primary);
+  color: white;
+  box-shadow: 0 6px 20px rgba(233, 69, 96, 0.4);
+}
+
+.pause-button:hover {
+  transform: scale(1.08);
+}
+
+.pause-button:active {
+  transform: scale(0.95);
+}
+
+.stop-button {
+  background: transparent;
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+}
+
+.stop-button:hover {
+  background: rgba(233, 69, 96, 0.15);
+  transform: scale(1.08);
+}
+
+.stop-button:active {
+  transform: scale(0.95);
+}
+
+.timer-container.paused {
+  opacity: 0.6;
+}
+
+.confirm-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 20;
+}
+
+.confirm-box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 21;
+  background: var(--color-surface);
+  border: 1px solid var(--color-primary);
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  min-width: 260px;
+}
+
+.confirm-box p {
+  margin: 0 0 1.25rem;
+  font-size: 1.05rem;
+}
+
+.confirm-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.confirm-yes,
+.confirm-no {
+  padding: 0.6rem 1.5rem;
+  border-radius: 6px;
+  border: none;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.confirm-yes {
+  background: var(--color-primary);
+  color: white;
+}
+
+.confirm-no {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-text);
+}
+
+.confirm-yes:hover,
+.confirm-no:hover {
+  opacity: 0.85;
+}
+
+.locations-button {
+  font-size: 1.3rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-text);
+  transition: background 0.15s ease;
+}
+
+.locations-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: scale(1.08);
+}
+
+.locations-box {
+  width: 300px;
+}
+
+.locations-chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  max-height: 250px;
+  overflow-y: auto;
+  margin: 0 0 1.25rem;
+  padding: 0.25rem;
+}
+
+.location-chip {
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  font-weight: bold;
+  font-size: 0.85rem;
+  animation: pop 0.3s ease;
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

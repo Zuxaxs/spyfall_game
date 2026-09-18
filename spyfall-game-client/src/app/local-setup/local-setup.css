@@ -1,0 +1,244 @@
+:host {
+  position: relative;
+  display: block;
+  background: var(--color-surface);
+  padding: 2rem;
+  border-radius: 16px;
+  text-align: center;
+  width: 440px;
+  max-width: 90vw;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.header h1 {
+  font-size: 1.4rem;
+  padding-right: 2.5rem;
+  padding-left: 2.5rem;
+}
+
+.subtitle {
+  margin: 0 0 1.5rem;
+  opacity: 0.7;
+  font-size: 0.85rem;
+}
+
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.info-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.info-icon:hover {
+  opacity: 0.85;
+}
+
+.hint-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 20;
+}
+
+.hint-box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 21;
+  background: var(--color-surface);
+  border: 1px solid var(--color-primary);
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  text-align: left;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  min-width: 260px;
+  max-width: 85vw;
+  font-size: 1rem;
+}
+
+.hint-title {
+  margin: 0 0 0.75rem;
+  font-size: 1.05rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.hint-box ul {
+  margin: 0 0 1.25rem;
+  padding-left: 1.2rem;
+}
+
+.hint-close {
+  display: block;
+  width: 100%;
+  padding: 0.6rem 1.5rem;
+  border-radius: 6px;
+  border: none;
+  font-size: 0.95rem;
+  cursor: pointer;
+  background: var(--color-primary);
+  color: white;
+}
+
+.hint-close:hover {
+  opacity: 0.85;
+}
+
+.player-names {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 242px;
+  overflow-y: auto;
+  margin-bottom: 1.5rem;
+  padding-right: 0.25rem;
+}
+
+.player-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.player-number {
+  flex-shrink: 0;
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: white;
+  font-size: 0.85rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.player-name-input {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  border: none;
+  font-size: 0.95rem;
+}
+
+button {
+  width: 100%;
+  padding: 0.85rem;
+  font-size: 1rem;
+  font-weight: bold;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+button:hover {
+  opacity: 0.85;
+}
+
+@media (max-width: 420px) {
+  :host {
+    padding: 1.25rem;
+    width: 100%;
+  }
+
+  .stat-row {
+    grid-template-columns: 1fr;
+  }
+
+  .header h1 {
+    font-size: 1.4rem;
+    padding-right: 2.5rem;
+  }
+
+  .settings-button {
+    width: 1.9rem;
+    height: 1.9rem;
+    top: 1rem;
+    right: 1rem;
+    font-size: 0.85rem;
+  }
+
+  .back-button {
+    width: 1.9rem;
+    height: 1.9rem;
+    top: 1rem;
+    left: 1rem;
+    font-size: 0.85rem;
+  }
+
+  .player-names {
+    max-height: 200px;
+  }
+}
+
+.settings-button {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-text);
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.settings-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: rotate(100deg);
+}
+
+.settings-placeholder {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  margin-bottom: 1.25rem;
+}
+
+.back-button {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-text);
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.back-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: scale(1.1);
+}

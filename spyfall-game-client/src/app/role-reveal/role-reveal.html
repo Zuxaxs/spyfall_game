@@ -1,0 +1,21 @@
+<p>{{ currentPlayerName() }} ({{ currentPlayerIndex() + 1 }} von {{ game.playerCount() }})</p>
+
+<div class="card-container" (click)="!isRevealed() && reveal()">
+  <div class="card" [class.flipped]="isRevealed()">
+    <div class="card-face card-front">
+      <span class="icon">🎴</span>
+      <p>Tippen zum Aufdecken</p>
+    </div>
+    <div class="card-face card-back" [class.spy]="isSpy()">
+      @if (isSpy()) {
+        <p class="role">🕵🏻‍♂️ Spion</p>
+      } @else {
+        <p class="role">{{ game.currentLocation() }}</p>
+      }
+    </div>
+  </div>
+</div>
+
+@if (isRevealed()) {
+  <button (click)="nextPlayer()">Nächster Spieler</button>
+}

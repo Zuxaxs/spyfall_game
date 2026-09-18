@@ -1,0 +1,48 @@
+<div class="timer-container" [class.paused]="isPaused()">
+  <svg class="timer-ring" width="220" height="220">
+    <circle class="ring-bg" cx="110" cy="110" r="100" />
+    <circle class="ring-progress" cx="110" cy="110" r="100" [attr.stroke-dasharray]="circumference"
+      [attr.stroke-dashoffset]="dashOffset()" />
+  </svg>
+  <div class="time-label">{{ minutes() }}:{{ seconds() < 10 ? '0' + seconds() : seconds() }}</div>
+  </div>
+
+  <div class="controls">
+    <button class="pause-button" (click)="togglePause()">
+      @if (isPaused()) {
+      <i class="fa-solid fa-play"></i>
+      } @else {
+      <i class="fa-solid fa-pause"></i>
+      }
+    </button>
+    <button class="stop-button" (click)="endRoundNow()"><i class="fa-solid fa-stop"></i></button>
+    <button class="locations-button" (click)="showLocations.set(true)">
+      <i class="fa-solid fa-list"></i>
+    </button>
+  </div>
+
+  @if (showStopConfirm()) {
+  <div class="confirm-backdrop" (click)="showStopConfirm.set(false)"></div>
+  <div class="confirm-box">
+    <p>Runde wirklich beenden?</p>
+    <div class="confirm-actions">
+      <button class="confirm-yes" (click)="confirmStop()">Ja</button>
+      <button class="confirm-no" (click)="showStopConfirm.set(false)">Nein</button>
+    </div>
+  </div>
+  }
+
+
+
+  @if (showLocations()) {
+  <div class="confirm-backdrop" (click)="showLocations.set(false)"></div>
+  <div class="confirm-box locations-box">
+    <p>Mögliche Orte</p>
+    <div class="locations-chip-list">
+      @for (location of game.locations(); track location) {
+      <span class="location-chip">{{ location }}</span>
+      }
+    </div>
+    <button class="confirm-yes" (click)="showLocations.set(false)">Schließen</button>
+  </div>
+  }

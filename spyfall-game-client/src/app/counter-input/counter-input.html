@@ -1,0 +1,13 @@
+<div class="counter">
+    @if (label()) {
+        <label class="counter-label">
+            <span class="label-text">{{ label() }}</span>
+            <ng-content></ng-content>
+        </label>
+    }
+    <div class="counter-controls">
+        <button type="button" class="counter-btn" (click)="decrement()">-</button>
+        <span class="counter-value">{{ value() }}</span>
+        <button type="button" class="counter-btn" (click)="increment()">+</button>
+    </div>
+</div>

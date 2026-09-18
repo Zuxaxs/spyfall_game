@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+</head>
+<body>
+  <h1>Socket.io Test</h1>
+
+  <button onclick="createRoom()">Raum erstellen</button>
+  <br><br>
+  <input id="roomCodeInput" placeholder="Raumcode">
+  <button onclick="joinRoom()">Raum beitreten</button>
+
+  <script>
+    const socket = io('http://localhost:3000');
+
+    socket.on('connect', () => {
+      console.log('Verbunden mit Server, meine ID:', socket.id);
+    });
+
+    socket.on('room-created', (data) => {
+      console.log('Raum erstellt: ', data);
+    });
+
+    socket.on('join-error', (message) => {
+      console.log('Fehler beim Beitreten:', message);
+    });
+
+    socket.on('players-updated', (players) => {
+      console.log('Spielerliste aktualisiert:', players);
+    });
+
+    function createRoom() {
+      const name = prompt('Dein Name:');
+      socket.emit('create-room', name);
+    }
+
+    function joinRoom() {
+      const name = prompt('Dein Name:');
+      const roomCode = document.getElementById('roomCodeInput').value;
+      socket.emit('join-room', { roomCode, playerName: name });
+    }
+  </script>
+</body>
+</html>

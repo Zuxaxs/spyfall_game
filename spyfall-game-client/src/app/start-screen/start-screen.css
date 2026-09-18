@@ -1,0 +1,134 @@
+:host {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.mode-choice {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  background: var(--color-surface);
+  border-radius: 1rem;
+  text-align: center;
+}
+
+.mode-choice h1 {
+  margin-bottom: 1rem;
+}
+
+.mode-choice button {
+  padding: 0.75rem 2rem;
+  border-radius: 0.5rem;
+  border: none;
+  background: var(--color-primary);
+  color: var(--color-text);
+  font-size: 1rem;
+  cursor: pointer;
+  width: 100%;
+}
+
+.mode-choice .settings-button {
+  width: 2.25rem;
+  padding: 0;
+}
+
+.settings-button {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-text);
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.settings-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.settings-button:hover i {
+  transform: rotate(100deg);
+}
+
+.settings-button i {
+  display: inline-block;
+  transition: transform 0.15s ease;
+}
+
+.hint-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 20;
+}
+
+.hint-box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 21;
+  background: var(--color-surface);
+  border: 1px solid var(--color-primary);
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  text-align: left;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  min-width: 260px;
+  max-width: 85vw;
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.hint-title {
+  font-size: 1.05rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.hint-close {
+  display: block;
+  width: 100%;
+  padding: 0.6rem 1.5rem;
+  border-radius: 6px;
+  border: none;
+  font-size: 0.95rem;
+  cursor: pointer;
+  background: var(--color-primary);
+  color: white;
+}
+
+.hint-close:hover {
+  opacity: 0.85;
+}
+
+.settings-placeholder {
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+@media (max-width: 420px) {
+  .settings-button {
+    width: 1.9rem;
+    height: 1.9rem;
+    top: 1rem;
+    right: 1rem;
+    font-size: 0.85rem;
+  }
+}

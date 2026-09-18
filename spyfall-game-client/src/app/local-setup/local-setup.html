@@ -1,0 +1,57 @@
+<div class="header">
+  <h1>🕵🏻‍♂️ SpyFall-Game</h1>
+</div>
+
+<button class="back-button" (click)="router.navigate(['/'])">
+  <i class="fa-solid fa-angle-left"></i>
+</button>
+
+<div class="stat-row">
+  <app-counter-input
+    label="Spieler"
+    [min]="3"
+    [max]="49"
+    [value]="playerCount()"
+    (valueChange)="setPlayerCount($event)"
+  ></app-counter-input>
+
+  <app-counter-input label="Spione" [min]="1" [max]="playerCount() - 1" [(value)]="spyCount">
+    <span class="info-icon" (click)="showHint.set(!showHint())">?</span>
+  </app-counter-input>
+
+  <app-counter-input label="Minuten" [min]="1" [max]="30" [(value)]="roundMinutes"></app-counter-input>
+</div>
+
+@if (showHint()) {
+  <div class="hint-backdrop" (click)="showHint.set(false)"></div>
+  <div class="hint-box">
+    <p class="hint-title">Empfehlung</p>
+    <ul>
+      <li>3–8 Spieler: 1 Spion</li>
+      <li>9–11 Spieler: 2 Spione</li>
+      <li>12–15 Spieler: 3 Spione</li>
+      <li>16–20 Spieler: 4 Spione</li>
+    </ul>
+    <button class="hint-close" (click)="showHint.set(false)">Verstanden</button>
+  </div>
+}
+
+<div class="player-names">
+  @for (name of playerNames(); track $index) {
+    <div class="player-row">
+      <span class="player-number">{{ $index + 1 }}</span>
+      <input
+        type="text"
+        class="player-name-input"
+        [value]="name"
+        [placeholder]="'Spieler ' + ($index + 1)"
+        (input)="updatePlayerName($index, $any($event.target).value)"
+      >
+    </div>
+  }
+</div>
+
+<div>
+    <button (click)="startGame()">Spiel starten!</button>
+    <p class="subtitle">{{ playerCount() }} Spieler · {{ spyCount() }} Spione · {{ roundMinutes() }} Min</p>
+</div>

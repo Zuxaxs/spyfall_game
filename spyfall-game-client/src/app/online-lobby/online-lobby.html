@@ -1,0 +1,67 @@
+<div class="lobby-container">
+
+    @if (!socketService.roomCode() && mode() === 'choice') {
+    <button class="back-button" (click)="router.navigate(['/'])">
+        <i class="fa-solid fa-angle-left"></i>
+    </button>
+    <div class="choice-buttons">
+        <button class="primary-button" (click)="mode.set('create')">Raum erstellen</button>
+        <button class="secondary-button" (click)="mode.set('join')">Raum beitreten</button>
+    </div>
+    }
+
+    @if (!socketService.roomCode() && mode() === 'create') {
+    <button class="back-button" (click)="mode.set('choice')">
+        <i class="fa-solid fa-angle-left"></i>
+    </button>
+    <div class="form-group">
+        <input class="text-input" [(ngModel)]="playerName" placeholder="Dein Name">
+        <button class="primary-button" (click)="onCreateRoom()">Erstellen</button>
+    </div>
+    }
+
+    @if (!socketService.roomCode() && mode() === 'join') {
+    <button class="back-button" (click)="mode.set('choice'); socketService.joinError.set(null)">
+        <i class="fa-solid fa-angle-left"></i>
+    </button>
+    <div class="form-group">
+        <input class="text-input" [(ngModel)]="joinCode" placeholder="Raumcode">
+        <input class="text-input" [(ngModel)]="playerName" placeholder="Dein Name">
+        <button class="primary-button" (click)="onJoinRoom()">Beitreten</button>
+        @if (socketService.joinError()) {
+        <p class="hint-text">{{ socketService.joinError() }}</p>
+        }
+    </div>
+    }
+
+    @if (socketService.roomCode()) {
+    <div class="room-info">
+        <p class="room-code">Raumcode: <span>{{ socketService.roomCode() }}</span></p>
+        <p class="players-label">Spieler:</p>
+        <ul class="players-list">
+            @for (player of socketService.players(); track player.id) {
+            <li>{{ player.name }}</li>
+            }
+        </ul>
+
+        @if (isHost()) {
+        <app-counter-input [label]="'Anzahl Spione'" [value]="spyCount()" (valueChange)="spyCount.set($event)" [min]="1"
+            [max]="socketService.players().length - 1">
+        </app-counter-input>
+        <app-counter-input [label]="'Rundendauer (Minuten)'" [value]="roundMinutes()"
+            (valueChange)="roundMinutes.set($event)" [min]="1" [max]="30">
+        </app-counter-input>
+        @if (!allPlayersBack()) {
+        <p class="hint-text">Warte, bis alle Spieler wieder im Raum sind...</p>
+        }
+        <button class="primary-button" [disabled]="!canStart()" (click)="onStartGame()">Spiel starten</button>
+        @if (socketService.players().length < 3) { <p class="hint-text">Mindestens 3 Spieler nötig.</p>
+            }
+            } @else {
+            <p class="hint-text">Warte auf den Host...</p>
+            }
+            <button class="secondary-button" (click)="onLeaveRoom()">Raum verlassen</button>
+    </div>
+    }
+
+</div>

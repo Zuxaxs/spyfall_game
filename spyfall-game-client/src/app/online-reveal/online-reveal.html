@@ -1,0 +1,26 @@
+<div class="reveal-container">
+
+@if (countdownValue() !== null) {
+  <div class="countdown-wrapper">
+    @for (n of [countdownValue()]; track n) {
+      <div class="countdown-number">{{ n }}</div>
+    }
+  </div>
+} @else if (socketService.roleData(); as role) {
+  @if (!iAmReady()) {
+    <div class="role-card" [class.spy-card]="role.isSpy">
+      @if (role.isSpy) {
+        <h1>Du bist der Spion!</h1>
+        <p>Finde heraus, wo die anderen sind.</p>
+      } @else {
+        <p class="role-hint">Der Ort ist:</p>
+        <h1>{{ role.location }}</h1>
+      }
+    </div>
+    <button class="primary-button" (click)="onReadyClick()">Bereit</button>
+  } @else {
+    <p class="hint-text">Warte auf andere Spieler ({{ socketService.readyStatus()?.readyCount }}/{{ socketService.readyStatus()?.totalCount }} bereit)</p>
+  }
+}
+
+</div>

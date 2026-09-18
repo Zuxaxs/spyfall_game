@@ -1,0 +1,36 @@
+<div class="header-row">
+  <button class="back-button" (click)="goBack()">
+    <i class="fa-solid fa-arrow-left"></i>
+  </button>
+  <h2>Orte verwalten</h2>
+</div>
+
+<div class="locations-list">
+  @for (location of game.locations(); track $index) {
+    <div class="location-row">
+      <input
+        type="text"
+        class="location-input"
+        [value]="location"
+        (input)="game.updateLocation($index, $any($event.target).value)"
+      >
+      <button class="delete-btn" (click)="game.removeLocation($index)">
+        <i class="fa-solid fa-trash"></i>
+      </button>
+    </div>
+  }
+</div>
+
+<div class="add-location-row">
+  <input
+    type="text"
+    class="location-input"
+    placeholder="Neuer Ort..."
+    [value]="newLocationName()"
+    (input)="newLocationName.set($any($event.target).value)"
+    (keyup.enter)="addLocation()"
+  >
+  <button class="add-btn" (click)="addLocation()">
+    <i class="fa-solid fa-plus"></i>
+  </button>
+</div>

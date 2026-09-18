@@ -1,0 +1,14 @@
+<div class="voting-card">
+  <h2>Wer war der Spion?</h2>
+
+  @if (!hasVoted()) {
+  <p class="hint-text">Wähle den Spieler, den du für den Spion hältst.</p>
+  <div class="player-grid">
+    @for (player of socketService.votingPlayers(); track player.id) {
+    <button class="player-vote-card" (click)="vote(player.id)">{{ player.name }}</button>
+    }
+  </div>
+  } @else {
+  <p class="hint-text">Warte auf die anderen Spieler...</p>
+  }
+</div>

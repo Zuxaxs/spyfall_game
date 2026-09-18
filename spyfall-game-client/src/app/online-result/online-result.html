@@ -1,0 +1,36 @@
+<div class="result-card">
+    <h2>Runde beendet!</h2>
+
+    <p class="location-label">Der Ort war</p>
+    <p class="location" [class.hidden-text]="!showAnswer()">{{ results()?.location }}</p>
+
+    <p class="spy-label">
+        🕵🏻‍♂️ Spion{{ (results()?.spyNames?.length ?? 0) > 1 ? 'e' : '' }}
+        war{{ (results()?.spyNames?.length ?? 0) > 1 ? 'en' : '' }}:
+    </p>
+    <div class="spy-list">
+        @for (name of results()?.spyNames; track name) {
+        <span class="spy-chip" [class.hidden-text]="!showAnswer()">{{ name }}</span>
+        }
+    </div>
+
+    <button class="reveal-toggle" (click)="showAnswer.set(!showAnswer())">
+        @if (showAnswer()) {
+        <i class="fa-solid fa-eye-slash"></i> Verbergen
+        } @else {
+        <i class="fa-solid fa-eye"></i> Auflösung anzeigen
+        }
+    </button>
+
+    @if (showAnswer()) {
+    <div class="votes-list">
+        <p class="votes-label">Abstimmungsergebnis:</p>
+        @for (entry of results()?.voteTally; track entry.name) {
+        <p>{{ entry.name }}: {{ entry.count }} {{ entry.count === 1 ? 'Stimme' : 'Stimmen' }}</p>
+        }
+    </div>
+    }
+
+    <br>
+    <button (click)="newRound()">Zurück zum Start</button>
+</div>

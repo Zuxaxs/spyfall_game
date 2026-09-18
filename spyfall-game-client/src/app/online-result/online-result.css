@@ -1,0 +1,97 @@
+:host {
+  display: flex;
+  justify-content: center;
+}
+
+.result-card {
+  background: var(--color-surface);
+  padding: 2.5rem;
+  border-radius: 16px;
+  text-align: center;
+  min-width: 320px;
+}
+
+.location-label {
+  margin: 0;
+  opacity: 0.7;
+  font-size: 0.9rem;
+}
+
+.location {
+  margin: 0.25rem 0 1.5rem;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.spy-label {
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+}
+
+.spy-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.spy-chip {
+  background: var(--color-primary);
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  font-weight: bold;
+  animation: pop 0.4s ease;
+}
+
+@keyframes pop {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.85;
+}
+.hidden-text {
+  filter: blur(8px);
+  user-select: none;
+}
+
+.hidden-text.animated {
+  transition: filter 0.1s ease;
+}
+
+.reveal-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+  padding: 0.5rem 1.25rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+}
+
+.reveal-toggle:hover {
+  background: rgba(233, 69, 96, 0.15);
+}
+
+.votes-list {
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
