@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  socketUrl: 'https://REPLACE-WITH-YOUR-RENDER-SERVER-URL.onrender.com',
+  socketUrl: 'https://spyfall-game-1r87.onrender.com',
 };
